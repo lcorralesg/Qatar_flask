@@ -1,0 +1,133 @@
+{%extends 'base.html'%}
+<h2>{%block title%}Mantenimiento{% endblock%}</h2>
+{%block content%}
+
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+        style="background: rgb(72,0,0);">
+        <div class="container-fluid d-flex flex-column p-0">
+            <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-chalkboard-teacher">
+
+                    </i>
+                </div>
+                <div class="sidebar-brand-text mx-3" style="font-size: 14px;">
+                    <span>mantenimiento</span>
+                </div>
+            </a>
+            <hr class="sidebar-divider my-0">
+            <ul class="navbar-nav text-light" id="accordionSidebar">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('qatar.agregar_seleccion')}}">
+                        <i class="fas fa-users">
+                        </i>
+                        <span>Selecciones</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('qatar.agregar_jugador')}}">
+                        <i class="fas fa-user">
+                        </i>
+                        <span>Jugadores</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{url_for('qatar.agregar_sede')}}">
+                        <i class="fas fa-map-marked-alt">
+                        </i>
+                        <span>Sede</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.register')}}">
+                        <i class="fas fa-user-circle">
+                        </i>
+                        <span>Register</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.logout')}}">
+                        <i class="fas fa-sign-out-alt">
+                        </i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="d-flex flex-column" id="content-wrapper" style="margin-top: 10px;">
+        <div id="content">
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Sedes</h3>
+                <form method="POST">
+                    <label for="nombre_sede">Nombre de la sede</label>
+                    <input type="text" name="nombre_sede" id="nombre_sede" class="form-control" placeholder="Nombre de la sede">
+                    <label for="pais">Pais</label>
+                    <input type="text" name="pais" id="pais" class="form-control" placeholder="Pais">
+                    <label for="direccion">Direccion</label>
+                    <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion">
+                    <label for="estado">Estado</label>
+                    <input type="text" name="estado" id="estado" class="form-control" placeholder="Estado">
+                    <label for="area">Area</label>
+                    <input type="text" name="area" id="area" class="form-control" placeholder="Area">
+                    <label for="capacidad">Capacidad</label>
+                    <input type="text" name="capacidad" id="capacidad" class="form-control" placeholder="Capacidad">
+                    <input type="submit" value="Agregar" class="btn btn-primary btn-block mt-4 mb-4 btn-lg">
+                </form>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 fw-bold">Mantenimiento</p>
+                    </div>
+                    <div class="card-body">
+                        <div id="dataTable-1" class="table-responsive table mt-2" role="grid"
+                            aria-describedby="dataTable_info">
+                            <table id="dataTable" class="table my-0">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre de la Sede</th>
+                                        <th>Pais</th>
+                                        <th>Direccion</th>
+                                        <th>Estado</th>
+                                        <th>Area</th>
+                                        <th>Capacidad</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for sede in sedes %}
+                                        <tr>
+                                            <td>{{sede.nombre_sede}}</td>
+                                            <td>{{sede.pais}}</td>
+                                            <td>{{sede.direccion}}</td>
+                                            <td>{{sede.estado}}</td>
+                                            <td>{{sede.area}}</td>
+                                            <td>{{sede.capacidad}}</td>
+                                            <td>
+                                                <a href="/editar_sede/edit/{{sede.id_sede}}"  class="btn btn-primary">Editar</a>
+                                                <a href="/delete/sede/{{sede.id_sede}}"  class="btn btn-danger">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Nombre de la Sede</strong></td>
+                                        <td><strong>Pais</strong></td>
+                                        <td><strong>Direccion</strong></td>
+                                        <td><strong>Estado</strong></td>
+                                        <td><strong>Area</strong></td>
+                                        <td><strong>Capacidad</strong></td>
+                                        <td><strong>Acciones</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{%extends 'base.html'%}
+{%block header%}
+<h2>{%block title%}Vista de Tablas{% endblock%}</h2>
+{%endblock%}
+{%block content%}
+
+<div class="card shadow">
+    <div class="card-header py-3">
+        <h3 class="text-primary m-0 fw-bold">Tabla de Jugadores</h3>
+    </div>
+    <div class="card-body">
+        <div id="dataTable-1" class="table-responsive table mt-2" role="grid"
+            aria-describedby="dataTable_info">
+            <table id="dataTable" class="table my-0">
+                <thead>
+                    <tr>
+                        <th>Apellidos</th>
+                        <th>Nombres</th>
+                        <th>Edad</th>
+                        <th>Altura</th>
+                        <th>Posicion</th>
+                        <th>Seleccion</th>
+                        <th>Goles</th>
+                        <th>Asistencias</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for jugador in jugadores %}
+                    <tr>
+                        <td>{{jugador.apellidos}}</td>
+                        <td>{{jugador.nombres}}</td>
+                        <td>{{jugador.edad}}</td>
+                        <td>{{jugador.altura}}</td>
+                        <td>{{jugador.posicion}}</td>
+                        <td>{{jugador.seleccion.pais}}</td>
+                        <td>{{jugador.goles}}</td>
+                        <td>{{jugador.asistencias}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><strong>Apellidos</strong></td>
+                        <td><strong>Nombres</strong></td>
+                        <td><strong>Edad</strong></td>
+                        <td><strong>Altura</strong></td>
+                        <td><strong>Posicion</strong></td>
+                        <td><strong>Seleccion</strong></td>
+                        <td><strong>Goles</strong></td>
+                        <td><strong>Asistencias</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

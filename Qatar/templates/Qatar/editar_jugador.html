@@ -1,0 +1,156 @@
+{%extends 'base.html'%}
+<h2>{%block title%}Mantenimiento{% endblock%}</h2>
+{%block content%}
+<div id="wrapper">
+    <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0"
+        style="background: rgb(72,0,0);">
+        <div class="container-fluid d-flex flex-column p-0">
+            <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-chalkboard-teacher">
+                    </i>
+                </div>
+                <div class="sidebar-brand-text mx-3" style="font-size: 14px;">
+                    <span>mantenimiento</span>
+                </div>
+            </a>
+            <hr class="sidebar-divider my-0">
+            <ul class="navbar-nav text-light" id="accordionSidebar">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('qatar.agregar_seleccion')}}">
+                        <i class="fas fa-users">
+                        </i>
+                        <span>Selecciones</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{url_for('qatar.agregar_jugador')}}">
+                        <i class="fas fa-user">
+                        </i>
+                        <span>Jugadores</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('qatar.agregar_sede')}}">
+                        <i class="fas fa-map-marked-alt">
+                        </i>
+                        <span>Sede</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.register')}}">
+                        <i class="fas fa-user-circle">
+                        </i>
+                        <span>Register</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('auth.logout')}}">
+                        <i class="fas fa-sign-out-alt">
+                        </i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="d-flex flex-column" id="content-wrapper" style="margin-top: 10px;">
+        <div id="content">
+            <div class="container-fluid">
+                <h3 class="text-dark mb-4">Jugadores</h3>
+                <form action="/editar_jugador/update/{{jugador_seleccion.id_jugador}}" method="POST">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" name="apellidos"  id="apellidos" value="{{jugador_seleccion.apellidos}}" required>
+                    <label for="nombres">Nombres</label>
+                    <input type="text" name="nombres" id="nombres" value="{{jugador_seleccion.nombres}}" required>
+                    <label for="fecha_nacimiento">Fecha de Nacimiento</label>
+                    <input type="date" name="fecha_nacimiento" id="fecha_nacimiento"
+                        value="{{jugador_seleccion.fecha_nacimiento}}" required>
+                    <label for="altura">Altura</label>
+                    <input type="text" name="altura" id="altura" value="{{jugador_seleccion.altura}}" required>
+                    <label for="posicion">Posicion</label>
+                    <input type="text" name="posicion" id="posicion" value="{{jugador_seleccion.posicion}}" required>
+                    <label for="id_seleccion">Seleccion</label>
+                    <select name="id_seleccion" id="id_seleccion" required>
+                        {% for seleccion in selecciones %} value="{{jugador_seleccion.seleccion.pais}}
+                            {% if seleccion.id_seleccion == jugador_seleccion.seleccion.id_seleccion %} 
+                            <option value="{{seleccion.id_seleccion}}" selected>{{seleccion.pais}}</option>
+                            {% else %}
+                            <option value="{{seleccion.id_seleccion}}">{{seleccion.pais}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label for="goles">Goles</label>
+                    <input type="text" name="goles" id="goles" value="{{jugador_seleccion.goles}}" required>
+                    <label for="asistencias">Asistencias</label>
+                    <input type="text" name="asistencias" id="asistencias" value="{{jugador_seleccion.asistencias}}" required>
+                    <input type="submit" value="Actualizar" class="btn btn-primary btn-block mt-4 mb-4 btn-lg">
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <p style="color: red; margin-top: 5px; margin-left: 10px;">{{ message }}</p>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </form>
+                <div class="card shadow">
+                    <div class="card-header py-3">
+                        <p class="text-primary m-0 fw-bold">Mantenimiento</p>
+                    </div>
+                    <div class="card-body">
+                        <div id="dataTable-1" class="table-responsive table mt-2" role="grid"
+                            aria-describedby="dataTable_info">
+                            <table id="dataTable" class="table my-0">
+                                <thead>
+                                    <tr>
+                                        <th>Apellidos</th>
+                                        <th>Nombres</th>
+                                        <th>Edad</th>
+                                        <th>Altura</th>
+                                        <th>Posicion</th>
+                                        <th>Seleccion</th>
+                                        <th>Goles</th>
+                                        <th>Asistencias</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for jugador in jugadores %}
+                                    <tr>
+                                        <td>{{jugador.apellidos}}</td>
+                                        <td>{{jugador.nombres}}</td>
+                                        <td>{{jugador.edad}}</td>
+                                        <td>{{jugador.altura}}</td>
+                                        <td>{{jugador.posicion}}</td>
+                                        <td>{{jugador.seleccion.pais}}</td>
+                                        <td>{{jugador.goles}}</td>
+                                        <td>{{jugador.asistencias}}</td>
+                                        <td>
+                                            <a href="/editar_jugador/edit/{{jugador.id_jugador}}" class="btn btn-primary">Editar</a>
+                                            <a href="/delete/{{jugador.id_jugador}}" class="btn btn-danger">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td><strong>Apellidos</strong></td>
+                                        <td><strong>Nombres</strong></td>
+                                        <td><strong>Edad</strong></td>
+                                        <td><strong>Altura</strong></td>
+                                        <td><strong>Posicion</strong></td>
+                                        <td><strong>Seleccion</strong></td>
+                                        <td><strong>Goles</strong></td>
+                                        <td><strong>Asistencias</strong></td>
+                                        <td><strong>Acciones</strong></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

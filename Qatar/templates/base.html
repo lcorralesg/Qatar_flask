@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<html lang="es">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='fonts/fontawesome-all.min.css')}}">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body id="page-top">
+    <header>
+        <div class="row" style="background: url('/static/img/fallback.png'); background-size: cover; background-position: center;">
+            <div class="col-md-3 col-12 d-flex justify-content-center">
+                <div class="row">
+                    <div class="col-4 col-md-4">
+                        <img src="{{ url_for('static', filename='img/Diseno_sin_titulo.png')}}" style="height: 120px; ">
+                    </div>
+                    <div class="col-8 col-md-8">
+                        <img src="{{ url_for('static', filename='img/Sin_titulo_800_235_px.png')}}" style="height: 60px; margin-top: 25px;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9 col-12 d-lg-flex d-xxl-flex justify-content-xxl-center" style="padding-top: 10px; padding-bottom: 10px;">
+                <ul class="nav" >
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('qatar.index')}}" style="color: rgb(255,255,255); font-size: 20px; font-weight: bold; text-align: center; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px;">Inicio</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('qatar.sedes')}}"style="color: rgb(255,255,255); font-size: 20px; font-weight: bold; text-align: center; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px;">Tabla de Sedes </a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('qatar.selecciones')}}" style="color: rgb(255,255,255); font-size: 20px; font-weight: bold; text-align: center; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px;">Tabla de Selecciones</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('auth.login')}}" style="color: rgb(255,255,255); font-size: 20px; font-weight: bold; text-align: center; margin-top: 10px; margin-bottom: 10px; margin-left: 10px; margin-right: 10px;">Mantenimiento</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="sticky-footer" style="background: #000000; margin-top: 10px; padding-top: 20px; padding-bottom: 10px;">
+        </br>
+        </br>
+        <div class="container my-auto">
+            <div class="text-center my-auto copyright">
+                <span style="color: rgb(182,183,184);">Copyright © Qatar 2023</span>
+            </div>
+        </div>
+        </br>
+        </br>
+    </footer>
+</body>
+</html>
